@@ -8,4 +8,4 @@ function Domains({}: Props) {
   )
 }
 
-export default Domains
+export default Domains  

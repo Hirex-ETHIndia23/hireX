@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Button, Stack } from "@chakra-ui/react";
 import ToggleTheme from "../utils/ToggleTheme";
 
 type Props = {
@@ -10,10 +10,10 @@ const LandingLayout = (props: Props) => {
 
   return (
   <div>
-    <Box position="fixed" top="20px" right="40px" zIndex={1}>
+    <Stack position="fixed" top="20px" right="40px" zIndex={1} >
+      {/* <Button onClick={() => {}}>Admin</Button> */}
       <ToggleTheme/>
-    </Box>
-
+    </Stack>
       <Flex
         direction="column"
         align="center"

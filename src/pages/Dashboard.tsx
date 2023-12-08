@@ -2,7 +2,6 @@ import React from "react";
 import ToggleTheme from "../utils/ToggleTheme";
 import { ReactComponent as Logo } from "../assets/logoround.svg";
 import { Link as ReactRouterLink } from 'react-router-dom'
-// import { Link as ChakraLink, LinkProps } from '@chakra-ui/react'
 import {
   Box,
   IconButton,
@@ -129,7 +128,6 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
           color: "white",
         }}
         {...rest}
-        // onClick={navigate(`/${link.name}`)}
       >
 
 
@@ -264,7 +262,6 @@ function Dashboard({}: Props) {
         {/* mobilenav */}
         <MobileNav onOpen={onOpen} />
         <Box ml={{ base: 0, md: 60 }} p="4">
-          {/* Content */}
         </Box>
       </Box>
     </div>

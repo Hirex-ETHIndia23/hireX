@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, createContext, useContext, useCallback } from "react";
 import { ethers } from "ethers";
 import {
   CardBody,
@@ -31,6 +31,7 @@ let provider: any;
 function Login({}: Props) {
   const [accountData, setAccountData] = useState<AccountType>({});
   const [message, setMessage] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn]=useState(false);
 
   const connectwalletHandler = useCallback(async () => {
     if (window.ethereum) {
@@ -58,6 +59,7 @@ function Login({}: Props) {
           chainId: network.chainId.toString(),
           network: network.name,
         });
+        setIsLoggedIn(true)
       } catch (error: Error | any) {
         alert(`Error connecting to MetaMask: ${error?.message ?? error}`);
       }
@@ -70,8 +72,6 @@ function Login({}: Props) {
       provider = ethers.getDefaultProvider("http://localhost:3000/");
     }
   }, [message]);
-
-
 
 
   const _sendMessageToMetaMask = useCallback(async () => {
@@ -111,7 +111,7 @@ function Login({}: Props) {
               bgGradient="linear(to-r, teal.500, green.700)"
               _hover={{ bg: "teal.600" }}
             >
-              {"Connect"}
+              { isLoggedIn? "Connected" : "Connect"}
             </Button>
           </Stack>
         </CardBody>
