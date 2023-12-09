@@ -1,7 +1,9 @@
 import React from "react";
+import {useEffect} from "react";
+
 import ToggleTheme from "../utils/ToggleTheme";
 import { ReactComponent as Logo } from "../assets/logoround.svg";
-import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ReactRouterLink } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -23,11 +25,12 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Link as ChakraLink, LinkProps
+  Link as ChakraLink,
+  LinkProps,
 } from "@chakra-ui/react";
+// import {useNavigate} from "react-router-dom";
 
 import {
-  FiHome,
   FiTrendingUp,
   FiMenu,
   FiBell,
@@ -39,6 +42,7 @@ import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { PiChatsCircle } from "react-icons/pi";
 import { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
+
 
 interface LinkItemProps {
   name: string;
@@ -61,12 +65,11 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Domains", icon: GrTechnology },
   { name: "Trending", icon: FiTrendingUp },
-  { name: "Your Huddle", icon: HiOutlineVideoCamera },
+  { name: "Huddle", icon: HiOutlineVideoCamera },
   { name: "Chatrooms", icon: PiChatsCircle },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-
   return (
     <Box
       transition="3s ease"
@@ -80,26 +83,26 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         {/* <Flex width={["27%"]} align={'row'}> */}
-        <Box width={["27%"]} >
+        <Box width={["27%"]}>
           <Logo />
-        </Box>  
-          <Text
-                  as={"span"}
-                  color={"green.400"}
-                  textAlign={["center", "center"]}
-                  bgGradient="linear(to-r, teal.300, green.500)"
-                  bgClip="text"
-                  fontWeight={"extrabold"}
-                  fontSize={"4xl"}
-                >
-                  HireX
-                </Text>
+        </Box>
+        <Text
+          as={"span"}
+          color={"green.400"}
+          textAlign={["center", "center"]}
+          bgGradient="linear(to-r, teal.300, green.500)"
+          bgClip="text"
+          fontWeight={"extrabold"}
+          fontSize={"4xl"}
+        >
+          HireX
+        </Text>
         {/* </Flex> */}
-        
+
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} py={6}>
+        <NavItem key={link.name} icon={link.icon} py={6} >
           {link.name}
         </NavItem>
       ))}
@@ -108,11 +111,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 };
 
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
-
   return (
     <Box
       as="a"
-      href="#"
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
@@ -129,22 +130,19 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         }}
         {...rest}
       >
-
-
-<ChakraLink as={ReactRouterLink} to={`/${children}`}>
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="28"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
-        {children}
+        <ChakraLink as={ReactRouterLink} to={`/${children}`}>
+          {icon && (
+            <Icon
+              mr="4"
+              fontSize="28"
+              _groupHover={{
+                color: "white",
+              }}
+              as={icon}
+            />
+          )}
+          {children}
         </ChakraLink>
-   
       </Flex>
     </Box>
   );
@@ -239,7 +237,13 @@ type Props = {};
 
 function Dashboard({}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    navigate('/Domains')
+  }, [])
+  
+  
   return (
     <div>
       <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -261,9 +265,9 @@ function Dashboard({}: Props) {
         </Drawer>
         {/* mobilenav */}
         <MobileNav onOpen={onOpen} />
-        <Box ml={{ base: 0, md: 60 }} p="4">
-        </Box>
+        <Box ml={{ base: 0, md: 60 }} p="4"></Box>
       </Box>
+
     </div>
   );
 }

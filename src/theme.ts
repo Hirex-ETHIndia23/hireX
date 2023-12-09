@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import { theme as chakraTheme } from '@chakra-ui/react'
 
 
 const theme = extendTheme({
@@ -14,6 +15,10 @@ const theme = extendTheme({
       },
     },
   },
+  fonts: {
+    heading: "Open Sans",
+    body: "Raleway",
+  }
 });
 
 export default theme

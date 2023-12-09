@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Button, Stack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import ToggleTheme from "../utils/ToggleTheme";
 
 type Props = {
