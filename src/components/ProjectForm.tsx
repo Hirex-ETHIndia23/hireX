@@ -8,11 +8,11 @@ import {
   FormLabel,
   Heading,
   Input,
-  InputGroup,
   Stack,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 type Props = {};
 //github id
@@ -46,11 +46,51 @@ const ProjectForm = (props: Props) => {
     projectImage: "",
   };
 
+  
+
   // Define the submit handler function
   const onSubmit = (values: any) => {
     // Handle form submission logic here
     console.log("Form submitted with values:", values);
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('description', values.description);
+    formData.append('image', values.image);
+    formData.append('githubLink', values.githubLink);
+    formData.append('youtubeLink', values.youtubeLink);
+    console.log(formData);
+
+
+    try{
+      const res =  axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+        // maxBodyLength: "Infinity",
+        headers: {
+          'Content-Type': `multipart/form-data;`,
+          'Authorization': `Bearer ${process.env.JWT}`
+        }
+      }).then((res) => {
+        console.log(res.data);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+    pinFileToIPFS(formData)
+
   };
+
+  const pinFileToIPFS = async (formData: any) => {
+    
+    const pinataMetadata = JSON.stringify({
+      name: 'ProjectImage',
+    });
+    formData.append('pinataMetadata', pinataMetadata);
+    const pinataOptions = JSON.stringify({
+      cidVersion: 0,
+    })
+    formData.append('pinataOptions', pinataOptions);
+    console.log("formData", formData);
+  }
+
 
   return (
     <Flex
