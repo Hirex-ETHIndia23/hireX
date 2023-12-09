@@ -9,12 +9,13 @@ import Landing from './pages/Landing';
 import theme from './theme';
 import { ColorModeScript } from '@chakra-ui/react'
 import Dashboard from './pages/Dashboard';
-import Footer from './utils/Footer';
 import Login from './pages/Login';
 import Domains from './pages/Domains';
 import Huddle from './pages/Huddle';
 import Trending from './pages/Trending';
 import ProjectForm from './components/ProjectForm';
+import Footer from './utils/Footer';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
 
 function App() {
 
+
   return (
     <div className="App">
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -46,3 +48,6 @@ function App() {
 }
 
 export default App;
+
+
+
