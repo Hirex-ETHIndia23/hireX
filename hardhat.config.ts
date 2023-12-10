@@ -5,10 +5,14 @@ import 'dotenv/config';
 const { PRIVATE_KEY } = process.env;
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "FileCoin",
+  defaultNetwork: "FileCoinCalibration",
   networks: {
     hardhat: {
       // You can leave this empty for the default Hardhat network setup
+    },
+    FileCoinCalibration: {
+      url: "https://api.calibration.node.glif.io/rpc/v1",
+      accounts: [PRIVATE_KEY as string], // Adjust the type assertion based on your use case
     },
     PolygonMumbai: {
       url: "https://rpc-mumbai.maticvigil.com",
