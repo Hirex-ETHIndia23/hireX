@@ -1,8 +1,11 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import 'dotenv/config';
+
+const { PRIVATE_KEY } = process.env;
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "PolygonMumbai",
+  defaultNetwork: "FileCoin",
   networks: {
     hardhat: {
       // You can leave this empty for the default Hardhat network setup
