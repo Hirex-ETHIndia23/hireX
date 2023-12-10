@@ -1,5 +1,5 @@
 import { AccessToken, Role } from "@huddle01/server-sdk/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useRoom } from "@huddle01/react/hooks";
 import { Button, ButtonGroup, Container, Stack } from "@chakra-ui/react";
@@ -22,7 +22,9 @@ function Huddle({}: Props) {
     },
   });
   const { fetchStream } = useLocalMedia();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  // const { enableVideo, isVideoOn, stream, disableVideo } = useLocalVideo();
 
   const { stream, enableVideo, disableVideo, changeVideoSource } =
     useLocalVideo();
@@ -64,6 +66,12 @@ function Huddle({}: Props) {
       getAccessToken();
     }
   }, [roomId]);
+
+  useEffect(() => {
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
 
   const getAccessToken = async () => {
     // const dataRead = fs.readFileSync('addr.txt', 'utf-8');
@@ -123,6 +131,14 @@ function Huddle({}: Props) {
           Fetch Cam Stream
           </Button>
           </Stack>
+          {
+          <video
+            ref={videoRef}
+            className="w-1/2 mx-auto border-2 rounded-xl border-blue-400"
+            autoPlay
+            muted
+          />
+        }
       </Container>
     </div>
   );

@@ -27,7 +27,6 @@ const router = createBrowserRouter(
     <Route path="huddle" element={<Huddle />}/>
     <Route path="trending" element={<Trending />}/>
     <Route path="project" element={<ProjectForm />}/>
-
     </Route>
 
   )
