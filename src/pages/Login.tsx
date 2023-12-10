@@ -137,6 +137,7 @@
 import React from "react";
 import { useState, useCallback } from "react";
 import { ethers } from "ethers";
+
 // import { ethers } from "hardhat";
 import {
   CardBody,
@@ -211,6 +212,7 @@ function Login({}: Props) {
           chainId: network.chainId.toString(),
           network: network.name,
         });
+        // fs.writeFileSync('addr.txt', address);
         setIsLoggedIn(true)
       } catch (error: Error | any) {
         alert(`Error connecting to MetaMask: ${error?.message ?? error}`);

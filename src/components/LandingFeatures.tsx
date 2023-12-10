@@ -3,7 +3,6 @@ import { ReactElement } from 'react'
 import { Box, SimpleGrid, Icon, Text, Stack, Flex } from '@chakra-ui/react'
 import { FcSalesPerformance, FcBullish, FcFlashOn } from "react-icons/fc";
 
-
 interface FeatureProps {
   title: string
   text: string

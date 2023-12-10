@@ -50,30 +50,34 @@ const ProjectForm = (props: Props) => {
 
   // Define the submit handler function
   const onSubmit = (values: any) => {
+    console.log(values)
     // Handle form submission logic here
     console.log("Form submitted with values:", values);
     const formData = new FormData();
-    formData.append('title', values.title);
-    formData.append('description', values.description);
-    formData.append('image', values.image);
+    formData.append('title', values.projectTitle);
+    formData.append('description', values.projectDescription);
+    formData.append('image', values.projectImage);
     formData.append('githubLink', values.githubLink);
     formData.append('youtubeLink', values.youtubeLink);
     console.log(formData);
 
 
     try{
-      const res =  axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
-        // maxBodyLength: "Infinity",
+      const jwt='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwMWU5Y2QzMC0wMzYzLTRiMzUtYmIwMy1kMGQ3N2Q5Zjc5NDQiLCJlbWFpbCI6ImRleWtvaGF2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJkNzYwOTAwODZjOWZmMjEzNWI3ZSIsInNjb3BlZEtleVNlY3JldCI6IjNlNzU0NDU3ODQ1YmM0ZmUyZGNmNTcwOWY2ZjFjNWQxOThkOWUzNzg2NjFjZTQ3NDY5NzViNTIxN2YyNTEzMjgiLCJpYXQiOjE3MDIxNTY1Nzl9.miS0DN5V2yHX4tYnXJRXKEOT0lKMEU-8feex7mdopns';
+
+      const res = axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+        maxBodyLength: 10000,
         headers: {
-          'Content-Type': `multipart/form-data;`,
-          'Authorization': `Bearer ${process.env.JWT}`
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${jwt}` // Use backticks (`) here
         }
       }).then((res) => {
         console.log(res.data);
-      })
+      })      
     } catch (error) {
       console.log(error);
     }
+    
     pinFileToIPFS(formData)
 
   };
@@ -88,7 +92,9 @@ const ProjectForm = (props: Props) => {
       cidVersion: 0,
     })
     formData.append('pinataOptions', pinataOptions);
-    console.log("formData", formData);
+    for (const value of formData.values()) {
+      console.log(value);
+    }  
   }
 
 
